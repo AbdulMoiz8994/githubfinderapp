@@ -26,8 +26,8 @@ test('Check The label',() =>{
   expect(findLabel).toBeInTheDocument()
 })
 
-test('Testing The tivers cli for ci/cd') ,() =>{
+test('Testing The tivers cli for ci/cd' ,() =>{
      const checking=render(<App/>);
-     const findText=checking.findByText(/Tervis Cli/i);
+     const findText=checking.getByText(/Tervis Cli/i);
      expect(findText).toBeInTheDocument();
-}
+})
