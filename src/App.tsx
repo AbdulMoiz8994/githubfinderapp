@@ -10,6 +10,8 @@ function App() {
      <label>Email</label>
      <input type="text" placeholder="email"/>
      <input type="text" placeholder="text"/>
+
+     <p> Tervis Cli</p>
     </div>
   );
 }
