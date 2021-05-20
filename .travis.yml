@@ -1,0 +1,17 @@
+language: node_js
+node_js:
+  - "stable"
+
+script:
+  - npm install
+  - npm test
+  - npm build
+
+deploy:
+  provider: surge
+  skip_cleanup: true
+  domain: react-test_case.surge.sh
+  project: ./build/
+
+on:
+  branch: master
