@@ -12,10 +12,10 @@ import 'aos/dist/aos.css'
 function App() {
 
 let [loading, setLoading]=useState<boolean>(false)
-let [data, setData]=useState<any>([])
+let [data, setData]=useState<string[]>([])
 
 // We can see the github users in our choice name
-let [users, setUsers]=useState<any>([])
+let [users, setUsers]=useState<string[]>([])
 let [alert,setAlert]=useState<null | string>(null)
 
 
@@ -39,9 +39,9 @@ const heading:string="Github Users"
 // For searching Github User API
 const SearchUserFunc= async(text: string) =>{
   setLoading(true)
-const data= await axios.get(`https://api.github.com/search/users?q=${text}&?client_id=${process.env.React_App_Client_ID}&client_secret=${process.env.React_App_Client_Secret}`)
-   console.log(data);
-   setData(data)
+const {data:{items}}= await axios.get(`https://api.github.com/search/users?q=${text}&?client_id=${process.env.React_App_Client_ID}&client_secret=${process.env.React_App_Client_Secret}`)
+   console.log(items);
+   setUsers(items)
    setLoading(false)
 }
 
@@ -58,6 +58,7 @@ const data= await axios.get(`https://api.github.com/search/users?q=${text}&?clie
         <MainUser 
            data={data}
            loading={loading}
+           users={users}
           />
     </div>
   );

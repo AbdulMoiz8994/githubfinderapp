@@ -3,13 +3,14 @@ import {GithubUser} from './GithubUser'
 
 export interface Props{
     data: any,
-    loading: boolean
+    loading: boolean,
+    users: string[],
 }
 
 
 const heading: string="Loading.."
 
-export const MainUser:React.FC<Props> = ({data,loading}) => {
+export const MainUser:React.FC<Props> = ({data,loading,users}) => {
 
 console.log(data,loading);
 
@@ -18,7 +19,7 @@ if(loading){
 }else{
     return (
         <div>
-            {data.map((users:any ) =>
+            {users.map((users:any ) =>
             <GithubUser 
            
             key={users.id} 
