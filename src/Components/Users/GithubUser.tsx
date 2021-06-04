@@ -14,7 +14,7 @@ export const GithubUser: React.FC<Props> = ({avatar_url,html_url,login}) => {
     console.log(avatar_url,html_url,login);
     
 useEffect(() =>{
-    Aos.init({duration: 1000,easing: 'ease-in-sine',delay: 300, once: false})
+    Aos.init({duration: 1000,easing: 'ease-in-sine', once: false})
 })
 
     return (
