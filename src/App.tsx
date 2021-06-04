@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import './App.css';
 // import {Service} from './Service/Service'
-import {MainUser} from './Components/MainUser'
+import {MainUser} from './Components/Users/MainUser'
+import {SearchBox} from './Components/Users/SearchBox'
 import axios from 'axios'
+import  Aos from 'aos';
+import 'aos/dist/aos.css'
 
 
 
@@ -19,6 +22,7 @@ let [data, setData]=useState<any>([])
       
       setData(data) 
       setLoading(false)
+      Aos.init({duration: 1000})
      }
     fetchData()
   },[])
@@ -28,7 +32,8 @@ const heading:string="Github Users"
 
   return (
     <div className="App">
-        <h1 className="heading1">{heading}</h1>
+        <h1 className="heading1" data-aos="zoom-in">{heading}</h1>
+        <SearchBox/>
         <MainUser 
            data={data}
            loading={loading}
