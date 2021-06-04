@@ -1,4 +1,4 @@
-import React,{useEffect, useRef,useState} from 'react'
+import React,{useEffect, useRef,MutableRefObject,useState} from 'react'
 import Aos from 'aos'
 import 'aos/dist/aos.css'
 
@@ -10,27 +10,30 @@ export interface SearchData{
 
 export const SearchBox:React.FC<SearchData> = ({SearchUserFunc}) => {
 
-// let [state, setState]=useState<string>('')
+let [state, setState]=useState<string>("")
 
   
 
- const getInput=useRef<any>(null)
+ let getInput:MutableRefObject<string | any>=useRef('')
  useEffect(() =>{
    getInput.current.focus();
    Aos.init({duration: 1000,easing: 'ease-in-sine'})
 
  },[])
- let value: string='';
+//  let value: string='';
  const onChangeFunc=(e:React.FormEvent<EventTarget>) =>{
-    e.preventDefault()
-     value=getInput.current.value
-     console.log(value);
+    // e.preventDefault()
+    //  value=getInput.current.value
+     setState(getInput.current.value)
+     console.log(state);
      
+
 }
 
 const onSubmitFunc=(e:React.FormEvent<EventTarget>) =>{
     e.preventDefault()
- SearchUserFunc(value)
+ SearchUserFunc(state)
+ setState("")
 }
 
     return (
