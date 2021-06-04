@@ -12,9 +12,8 @@ export const SearchBox:React.FC<SearchData> = ({SearchUserFunc}) => {
 
 let [state, setState]=useState<string>("")
 
-  
-
  let getInput:MutableRefObject<string | any>=useRef('')
+
  useEffect(() =>{
    getInput.current.focus();
    Aos.init({duration: 1000,easing: 'ease-in-sine'})
@@ -34,8 +33,8 @@ const onSubmitFunc=(e:React.FormEvent<EventTarget>) =>{
     e.preventDefault()
  SearchUserFunc(state)
  setState("")
+ 
 }
-
     return (
         <>
         <form method="post" className="form" data-aos="fade-down" onSubmit={onSubmitFunc}>
