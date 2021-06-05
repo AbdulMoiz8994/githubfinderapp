@@ -1,14 +1,18 @@
 import React,{useEffect, useRef,MutableRefObject,useState} from 'react'
 import Aos from 'aos'
 import 'aos/dist/aos.css'
+import {AlertData} from '../../App'
+
 
 export interface SearchData{
     SearchUserFunc:(text: string) => Promise<void>
+    setAlerts: ({msg, type}:AlertData) => void
+
 }
 
 
 
-export const SearchBox:React.FC<SearchData> = ({SearchUserFunc}) => {
+export const SearchBox:React.FC<SearchData> = ({SearchUserFunc,setAlerts}) => {
 
 let [state, setState]=useState<string>("")
 
@@ -22,17 +26,21 @@ let [state, setState]=useState<string>("")
 //  let value: string='';
  const onChangeFunc=(e:React.FormEvent<EventTarget>) =>{
     // e.preventDefault()
-    //  value=getInput.current.value
-     setState(getInput.current.value)
-     console.log(state);
-     
+    //  value=getInput.current.value     
+setState(getInput.current.value)
+console.log(state);
 
 }
 
 const onSubmitFunc=(e:React.FormEvent<EventTarget>) =>{
     e.preventDefault()
- SearchUserFunc(state)
- setState("")
+    if(state === ''){
+        setAlerts({msg:'Please Enter Valid Username',type:'light'})
+    }else{
+        SearchUserFunc(state)
+        setState("")
+    }
+
  
 }
     return (

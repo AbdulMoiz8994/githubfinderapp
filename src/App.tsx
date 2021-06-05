@@ -3,9 +3,17 @@ import './App.css';
 // import {Service} from './Service/Service'
 import {MainUser} from './Components/Users/MainUser'
 import {SearchBox} from './Components/Users/SearchBox'
+import {Alert} from './Components/Alert/Alert'
+
 import axios from 'axios'
 import  Aos from 'aos';
 import 'aos/dist/aos.css'
+
+
+export type AlertData={
+  msg: string,
+  type: string,
+}
 
 
 
@@ -16,7 +24,7 @@ let [data, setData]=useState<string[]>([])
 
 // We can see the github users in our choice name
 let [users, setUsers]=useState<string[]>([])
-let [alert,setAlert]=useState<null | string>(null)
+let [alert,setAlert]=useState<AlertData>()
 
 
   useEffect(() =>{
@@ -44,16 +52,25 @@ const {data:{items}}= await axios.get(`https://api.github.com/search/users?q=${t
    setUsers(items)
    setLoading(false)
 }
-
-
+// If the user click ti empty input box then show danger text lin where we need to tell that you should fill the box
+const setAlerts=({msg,type}:AlertData) =>{
+   console.log(msg,type);
+   setAlert({msg,type})
+   setTimeout(() =>{
+     setAlert(undefined)
+   },2000)
+}
 
 
 
   return (
     <div className="App">
         <h1 className="heading1" data-aos="zoom-in">{heading}</h1>
+
+        <Alert alert={alert}/>
         <SearchBox
           SearchUserFunc={SearchUserFunc}
+          setAlerts={setAlerts}
         />
         <MainUser 
            data={data}
