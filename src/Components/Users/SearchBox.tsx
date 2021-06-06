@@ -7,12 +7,13 @@ import {AlertData} from '../../App'
 export interface SearchData{
     SearchUserFunc:(text: string) => Promise<void>
     setAlerts: ({msg, type}:AlertData) => void
-
+    ClearUserButton: () => void
+    showClearButton: boolean
 }
 
 
 
-export const SearchBox:React.FC<SearchData> = ({SearchUserFunc,setAlerts}) => {
+export const SearchBox:React.FC<SearchData> = ({SearchUserFunc,setAlerts,ClearUserButton,showClearButton}) => {
 
 let [state, setState]=useState<string>("")
 
@@ -40,7 +41,6 @@ const onSubmitFunc=(e:React.FormEvent<EventTarget>) =>{
         SearchUserFunc(state)
         setState("")
     }
-
  
 }
     return (
@@ -49,6 +49,10 @@ const onSubmitFunc=(e:React.FormEvent<EventTarget>) =>{
            <input type="text" ref={getInput} name="text" placeholder="Find Github User" onChange={onChangeFunc}/>     
            <input type="submit" value="Submit" className="btn btn-dark btn-block" />
         </form>  
+        {/* if showClearButton will be true then this button will show */}
+{showClearButton &&(
+    <button className="btn btn-block" onClick={ClearUserButton}>Clear</button>
+)}
         </>
     )
 }

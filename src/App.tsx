@@ -60,7 +60,9 @@ const setAlerts=({msg,type}:AlertData) =>{
      setAlert(undefined)
    },2000)
 }
-
+const ClearUserButton=() =>{
+  setUsers([])
+}
 
 
   return (
@@ -71,6 +73,8 @@ const setAlerts=({msg,type}:AlertData) =>{
         <SearchBox
           SearchUserFunc={SearchUserFunc}
           setAlerts={setAlerts}
+          ClearUserButton={ClearUserButton}
+          showClearButton={users.length > 0 ? true : false }
         />
         <MainUser 
            data={data}
